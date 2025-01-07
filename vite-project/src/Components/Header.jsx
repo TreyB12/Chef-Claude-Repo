@@ -1,4 +1,4 @@
-import { version } from 'react'
+
 import chefClaudeLogo from "/src/assets/chef-icon.png"
 
 export default function Header () {
@@ -6,7 +6,7 @@ export default function Header () {
         <>
         <header className="header">
             <img src={chefClaudeLogo} alt="chef claude logo" />
-            <h1>Chef Claude</h1> <small>{version}</small>
+            <h1>Chef Claude</h1> 
         </header>
         
         </>

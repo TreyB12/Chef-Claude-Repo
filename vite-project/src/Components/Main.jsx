@@ -1,14 +1,21 @@
 import { useState } from "react"
+import IngredientsList from "../Components/IngredientsList"
+import ClaudeRecipe from "../Components/ClaudeRecipe"
+import { getRecipeFromChefClaude } from "../Components/ai.js"
 
 export default function Main () {
 
-const [ingredients, setIngredients] = useState(["Chicken", "Oregano", "Tomatoes"])
+const [ingredients, setIngredients] = useState([])
+
+const [recipe, setRecipe] = useState("")
 
 
+async function getRecipe () {
+   const RecipeMarkdown = await getRecipeFromChefClaude(ingredients)
+   setRecipe(RecipeMarkdown)
+}
 
-const ingredientListItems = ingredients.map((ingredient) => {
-    return <li key={ingredient}>{ingredient}</li>
-})
+
 
 function Submit (formData) {
     
@@ -31,9 +38,9 @@ function Submit (formData) {
                 />
                 <button>Add ingredient</button>
             </form>
-            <ul>
-                {ingredientListItems}
-            </ul>
+            {ingredients.length > 0 && <IngredientsList ingredients={ingredients} getRecipe={getRecipe}/>}
+
+            { recipe && <ClaudeRecipe recipe={recipe} />}
         </main>
     )
 }
